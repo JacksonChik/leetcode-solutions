@@ -1,27 +1,33 @@
 function nextVersion(oldVer) {
-  // const newVer = (parseInt(oldVer.replace(/\./g, '')) + 1)
-  // // I was planning to use replaceAll() instead of replace() because regex statements
-  // // are hard to read and maintain, but i remembered that replaceAll() isn't supported
-  // // by every browser, so it wouldn't work in all cases.
-  //   .toString()
-  //   .split('')
-  //   .join('.');
   const splitted = oldVer.split(".");
+  // we first remove the dots as delimiters, and split the digits in the version number into a string array, where every element is a digit string
   const splittedLastIndex = splitted.length - 1;
   splitted[splittedLastIndex] = (
     parseInt(splitted[splittedLastIndex]) + 1
   ).toString();
+  // when we want to update the old version number to the new version number, we must add 1 to the last digit of the old version number first,
+  // and then we check for carry(for the case where the last digit is > 9)
 
   for (let i = splittedLastIndex; i > 0; i--) {
+    // we traverse through the digit array to check for carries (e.g. 9.9.9 + 0.0.1 -> 9.9.10 -> 9.10.0 -> 10.0.0)
     if (splitted[i] > 9) {
       splitted[i] = (parseInt(splitted[i]) - 10).toString();
       splitted[i - 1] = (parseInt(splitted[i - 1]) + 1).toString();
+      // since the digits in splitted[] are strings, to do calculations(+1 or -10 when carrying over) we have to first use parseInt and
+      // when we are done with the calculations, we use toString to turn them back to String to store in splitted
     }
   }
-
   const newVer = splitted.join(".");
+  // splitted array now stores the digits Strings that are ready to be joined together by dots
   return newVer;
 }
+
+// A side note: my old implementation is:
+// const newVer = (parseInt(oldVer.replace(/\./g, '')) + 1)
+//   .toString()
+//   .split('')
+//   .join('.');
+// which is much more elegant, but the first element of the version number can consist of > 1 digits(see test case 5), which sadly renders this solution useless
 
 //Given test cases:
 const testCase1 = "1.2.3";
