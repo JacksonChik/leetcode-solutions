@@ -41,7 +41,7 @@ const testCase4Ans = "1.2.3.4.5.6.7.9";
 const testCase5 = "9.9";
 const testCase5Ans = "10.0";
 
-//Additional test cases:
+//Some additional test cases that I added:
 const addTestCase1 = "999999.9";
 const addTestCase1Ans = "1000000.0";
 const addTestCase2 = "0";
@@ -52,6 +52,10 @@ const addTestCase4 = "0.0.0";
 const addTestCase4Ans = "0.0.1";
 const addTestCase5 = "9.0.0.9";
 const addTestCase5Ans = "9.0.1.0";
+const addTestCase6 = "-12.3";
+const addTestCase6Ans = "-12.4";
+const addTestCase7 = "-0.0.0";
+const addTestCase7Ans = "-0.0.1";
 
 console.log("test 1:", nextVersion(testCase1) === testCase1Ans);
 console.log("test 2:", nextVersion(testCase2) === testCase2Ans);
@@ -78,4 +82,12 @@ console.log(
 console.log(
   "additional test 5:",
   nextVersion(addTestCase5) === addTestCase5Ans
+);
+console.log(
+  "additional test 6:",
+  nextVersion(addTestCase6) === addTestCase6Ans
+);
+console.log(
+  "additional test 7:",
+  nextVersion(addTestCase7) === addTestCase7Ans
 );
