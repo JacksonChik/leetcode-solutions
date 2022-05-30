@@ -35,6 +35,9 @@ class Solution {
         if(visited[toSearch]) return true;
         if(isLoop[toSearch]) return false;
         isLoop[toSearch] = true;
+        // when we call DFS on all of a vertex's adjacent nodes, an adjacent node can only be
+        // visited once! Or else there is a loop (we set isLoop to true the first time we visit it)
+        // which leads to stack overflow... (infinite recursion)
         ArrayList<Integer> curVertex = adj.get(toSearch);
         for(int i = 0; i < curVertex.size(); i++){
             // if(!visited[i]) is NOT needed here! we visit ALL the adjacent nodes of a vertex!!!
